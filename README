@@ -28,6 +28,8 @@ TODO
 - Make route file parser for popular frameworks to avoid having to maintain replicate routes in this frontal router and the new application. 
 - Make more RouteFileParsers and Dispatchers with focus on performance 
 - Make cache components for redis and etc.
+- Tests
+- Escape plans for frameworks like CodeIgniter, Yii and etc.
 
 Credits 
 ---------------------------
