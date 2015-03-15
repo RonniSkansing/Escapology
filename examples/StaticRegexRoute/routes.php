@@ -5,5 +5,6 @@ return [
 	['GET', '/user'],
 	['GET', '/user/'],
 	['GET', '/user/\d'],
-	['GET', '/a']
+	['POST', '/user/\d'],
+	['POST', '/login']
 ];

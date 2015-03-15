@@ -25,18 +25,28 @@ class Regex implements RouteFileParser {
    */
   public function digest($file)
   {
+    if(file_exists($file) === false) {
+      throw new \Exception('Route file not found.');
+    }
     $routesData = require $file;
-    if($routesData === null) {
-      throw new Exception('No route data loaded');
+    if(empty($routesData)) {
+      throw new \Exception('Route file is empty.');
     }
-    $data = [];
-    $routeRegex = self::REGEX_PREFIX;
-    for($i = 0; $i < count($routesData) -1; ++$i) { 
-      $routeRegex .= $routesData[$i][self::URI] . self::REGEX_SEPARATOR; 
-      $data[$routesData[$i][self::VERB]][$routesData[$i][self::URI]] = true;
+    $routeRegexes = [];
+    for($i = 0; $i < count($routesData) -1; ++$i) {
+      if(isset($routeRegexes[$routesData[$i][self::VERB]]) === false) {
+        $routeRegexes[$routesData[$i][self::VERB]] = self::REGEX_PREFIX;
+      }
+      $routeRegexes[$routesData[$i][self::VERB]] .= $routesData[$i][self::URI] . self::REGEX_SEPARATOR;  
     }
-    $routeRegex .= $routesData[$i][self::URI] . self::REGEX_AFFIX;
-    $data[] = $routeRegex;
-    return $data;
+    if(isset($routeRegexes[$routesData[$i][self::VERB]]) === false) {
+      $routeRegexes[$routesData[$i][self::VERB]] = self::REGEX_PREFIX;
+    }
+    $routeRegexes[$routesData[$i][self::VERB]] .= $routesData[$i][self::URI];
+    foreach($routeRegexes as $verb => $regex) {
+      $routeRegexes[$verb] .= self::REGEX_AFFIX;   
+    }
+
+    return $routeRegexes;
   }
 }

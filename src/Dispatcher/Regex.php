@@ -35,13 +35,10 @@ class Regex implements Dispatcher {
    */
   public function dispatch($routesData)
   {
-    $routeRegex = $routesData[0];
-    $uriFound = preg_match($routesData[0], $this->uri, $matches);
-    if( ! $uriFound) {
-      
+    if(empty($routesData)) {
       return self::NOT_FOUND;
     }
 
-    return isset($routesData[$this->verb][$matches[0]]) ? self::FOUND : self::NOT_FOUND;
+   return preg_match($routesData[$this->verb], $this->uri) ? self::FOUND : self::NOT_FOUND;
   }
 }

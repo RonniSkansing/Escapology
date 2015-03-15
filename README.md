@@ -33,4 +33,4 @@ TODO
 
 Credits 
 ---------------------------
-This package routing is highly inspired by Nikita Popov's [FastRoute](https://github.com/nikic/FastRoute/) library
+This package regex routing is highly inspired by Nikita Popov's [FastRoute](https://github.com/nikic/FastRoute/) library
