@@ -1,3 +1,5 @@
+![Travis-CI](https://travis-ci.org/RonnieSkansing/Escapism.svg?branch=master)
+
 Escapism
 ========================
 A front controller to put in front of your impossible-to-ever-refactor-into-clean-code codebase/framework.
