@@ -63,6 +63,34 @@ class RegexTest extends \PHPUnit_Framework_TestCase {
     );
   }
 
+  public function testRouteRegexHasSeparatorAsConstant() 
+  {
+    $routesFile = 'twoRoutes.php';
+    $routes = require __DIR__.'/../FixtureData/'.$routesFile;
+    $routeRegexMap = $this->getDigestedFromFixture('twoRoutes.php');
+    $offset = strpos($routeRegexMap['GET'], $routes[0][1]);
+    $uriLength = strlen($routes[0][1]);
+    $separatorTokenOffset = $offset + $uriLength;
+    $this->assertSame(
+      RouteFileParser::REGEX_SEPARATOR,
+      substr($routeRegexMap['GET'], $separatorTokenOffset, 1)  
+    );
+  }
+
+  public function testRegexHasSeparatorIsNotAddedToLastRoute() 
+  {
+    $routesFile = 'twoRoutes.php';
+    $routes = require __DIR__.'/../FixtureData/'.$routesFile;
+    $routeRegexMap = $this->getDigestedFromFixture('twoRoutes.php');
+    $offset = strpos($routeRegexMap['GET'], $routes[1][1]);
+    $uriLength = strlen($routes[1][1]);
+    $separatorTokenOffset = $offset + $uriLength;
+    $this->assertNotSame(
+      RouteFileParser::REGEX_SEPARATOR,
+      substr($routeRegexMap['GET'], $separatorTokenOffset, 1)  
+    );
+  }
+
   public function testRouteRegexHasRegexAffixAsConstant() 
   {
     $routeRegexMap = $this->getDigestedFromFixture('routes.php');
@@ -80,11 +108,22 @@ class RegexTest extends \PHPUnit_Framework_TestCase {
     );
   }
 
-  /**
-   * @todo  
-   *   test Adds each route to regex expression
-   *   ..
-   */
+  public function testBuildsAGroupBasedRegexOutOfRoutesForEachVerb()
+  {
+       $routeRegexMap = $this->getDigestedFromFixture('routes.php');
+       $this->assertSame(
+        '~^(?:/|/abc|/a/b/c|/ab|)$~',
+        $routeRegexMap['GET']
+      );
+      $this->assertSame(
+        '~^(?:/abc|/ab)$~',
+        $routeRegexMap['POST']
+      );
+      $this->assertSame(
+        '~^(?:/abc|)$~',
+        $routeRegexMap['PUT']
+      );
+  }
 
   private function getRouteFileFixture($routeFileName)
   {
