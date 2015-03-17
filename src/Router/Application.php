@@ -1,7 +1,8 @@
 <?php
 namespace Skansing\Escapism\Router;
 
-use \Skansing\Escapism\Dispatcher,
+use \Skansing\Escapism\Cacher,
+    \Skansing\Escapism\Dispatcher,
     \Skansing\Escapism\Router,
     \Skansing\Escapism\RouteFileParser,
     \Skansing\Escapism\RouteFileParser\Regex as RegexRouteFileParser,
@@ -11,17 +12,29 @@ class Application implements Router {
 
   private 
     /**
-     * @var RouteFileParser
+     * @var RouteFileParser $routeFileParser
      */
     $routeFileParser,
+
     /**
-     * @var Dispatcher
+     * @var Dispatcher $dispatcher
      */
     $dispatcher,
+
     /**
-     * @var Cacher
+     * @var Cacher $cacher
      */
-    $cacher;
+    $cacher,
+
+    /**
+     * @var string $cacheKey]
+     */
+    $cacheKey,
+
+    /**
+     * @var boolean $cacheInUse
+     */
+    $cacheInUse = false;
 
   /**
    * Application router
@@ -33,12 +46,17 @@ class Application implements Router {
    */
   public function __construct(
     Dispatcher $dispatcher = null,    
-    RouteFileParser $routeFileParser = null
-    //Cacher $cacher = null 
+    RouteFileParser $routeFileParser = null,
+    Cacher $cacher = null,
+    $cacheKey = null 
   ){
     $this->routeFileParser = $routeFileParser ?: new RegexRouteFileParser;
     $this->dispatcher = $dispatcher ?: new RegexDispatcher($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
-    //$this->cacher = $cacher ?: null; // @todo add caching interface
+    $this->cacher = $cacher;
+    if($this->cacher) {
+      $this->cacheKey = $cacheKey ?: '__routeCache';  
+      $this->cacheInUse = true;
+    }
   }
 
   /**
@@ -51,8 +69,19 @@ class Application implements Router {
   public function handle(
     $routesFile
   ){
-    return $this->dispatcher->dispatch(
-      $this->routeFileParser->digest($routesFile)
+    if($this->cacheInUse) {
+      $routeData = $this->cacher->get($this->cacheKey);  
+      if($routeData === false) {
+        $routeData = $this->routeFileParser->digest($routesFile);
+        $this->cacher->set($this->cacheKey, $routeData);
+      }  
+    } else {
+      $routeData = $this->routeFileParser->digest($routesFile);
+    }
+    $result = $this->dispatcher->dispatch(
+      $routeData
     );
+
+    return $result;
   }
 }
