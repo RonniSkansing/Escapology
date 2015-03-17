@@ -35,25 +35,26 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
       self::RouteFileParserClassName
     );
   }
-/*
+
   public function testRouteFileParserIsCalledForDigestingRouteFile()
   {
-    $routeFileParserMock = $this->getMockWithDisabledConstructor(' Skansing\Escapism\RouteFileParser');//self::DispatcherClassName);
+    $routeFileParserMock = $this->getMockWithDisabledConstructor('\Skansing\Escapism\RouteFileParser');//self::DispatcherClassName);
     $routeFileParserMock->expects($this->once())->method('digest');
     $application = new Application(null, $routeFileParserMock);
-    $router->route(
-      __DIR__.'/../FixtureData/routes.php',
-      __DIR__.'/../FixtureData/dummy',
-      __DIR__.'/../FixtureData/dummy'
+    $application->handle(
+      __DIR__.'/../FixtureData/routes.php'
     );
   }
-/*
+
   public function testDigest()
   {
-    $routeFileParserMock = $this->getMockWithDisabledConstructor(self::DispatcherClassName);
-    $fileSessionHandlerMock->expects($this->any())->method('dispatch')->will($this->returnValue(False));
+    $fileSessionHandlerMock = $this->getMockWithDisabledConstructor(self::DispatcherClassName);
+    $fileSessionHandlerMock->expects($this->once())->method('dispatch');
+    $application = new Application($fileSessionHandlerMock, null);
+    $application->handle(
+      __DIR__.'/../FixtureData/routes.php'
+    );
   }
-*/
 
   private function getMockWithDisabledConstructor($className)
   {

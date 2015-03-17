@@ -56,8 +56,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase {
 
   public function testRouteRegexHasRegexPrefixAsConstant() 
   {
-    $routeRegexMap = $this->getDigestedFromFixture('routes.php');
-    
+    $routeRegexMap = $this->getDigestedFromFixture('routes.php');    
     $this->assertStringStartsWith(
       RouteFileParser::REGEX_PREFIX, $routeRegexMap['GET']
     );
@@ -105,6 +104,14 @@ class RegexTest extends \PHPUnit_Framework_TestCase {
     $routeRegexMap = $this->getDigestedFromFixture('twoRoutes.php');
     $this->assertTrue(
       strpos($routeRegexMap['GET'], RouteFileParser::REGEX_SEPARATOR) !== FALSE
+    );
+  }
+
+  public function testGroupRegexIsAppendedOnASingleRoute()
+  {
+    $routeRegexMap = $this->getDigestedFromFixture('singleRoute.php');
+    $this->assertStringStartsWith(
+      RouteFileParser::REGEX_PREFIX, $routeRegexMap['GET']
     );
   }
 

@@ -1,10 +1,9 @@
 <?php
 return [
-	//'VERB', 'URI'
+	//'VERB', 'REGEX URI'
 	['GET', '/'],
-	['GET', '/user'],
-	['GET', '/user/'],
-	['GET', '/user/\d'],
-	['POST', '/user/\d'],
+	['GET', '/blog?.+'],
+	['GET', '/user/\d+'],
+	['POST', '/user/\d+'],
 	['POST', '/login']
 ];

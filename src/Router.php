@@ -2,9 +2,7 @@
 namespace Skansing\Escapism;
 
 Interface Router {
-  public function route(
-    $routesFile,
-    $newApplicationFile,
-    $oldApplicationFile
+  public function handle(
+    $routesFile
   );
 }

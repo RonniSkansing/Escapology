@@ -48,22 +48,11 @@ class Application implements Router {
    * @param  string $newApplicationFile
    * @param  string $oldApplicationFile
    */
-  public function route(
-    $routesFile,
-    $newApplicationFile,
-    $oldApplicationFile
+  public function handle(
+    $routesFile
   ){
-    $routesData = $this->routeFileParser->digest($routesFile);
-    $route = $this->dispatcher->dispatch(
-      $routesData
+    return $this->dispatcher->dispatch(
+      $this->routeFileParser->digest($routesFile)
     );
-    switch($route) {
-      case Dispatcher::NOT_FOUND:
-        require $oldApplicationFile;
-        break;
-      case Dispatcher::FOUND:
-        require $newApplicationFile;
-        break;
-    }
   }
 }

@@ -1,9 +1,12 @@
 <?php
 require __DIR__ . '/../../vendor/autoload.php';
 
-$router = new Skansing\Escapism\Router\Application;
-$router->route(
-	__DIR__.'/routes.php',
-	__DIR__.'/newApplication/index.php',
-	__DIR__.'/oldApplication/index.php'
+$applicationRouter = new Skansing\Escapism\Router\Application;
+$routeFound = $applicationRouter->handle(
+	__DIR__.'/bigRoute.php'
 );
+if($routeFound) {
+	require __DIR__.'/newApplication/index.php';
+} else {
+	require __DIR__.'/oldApplication/index.php';
+}
