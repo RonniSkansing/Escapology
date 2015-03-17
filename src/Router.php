@@ -1,5 +1,5 @@
 <?php
-namespace Skansing\Escapism;
+namespace Skansing\Escapology;
 
 Interface Router {
   public function handle(

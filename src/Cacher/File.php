@@ -1,7 +1,7 @@
 <?php
-namespace Skansing\Escapism\Cacher;
+namespace Skansing\Escapology\Cacher;
 
-use \Skansing\Escapism\Cacher;
+use \Skansing\Escapology\Cacher;
 
 class File implements Cacher {
 

@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../../vendor/autoload.php';
-$applicationRouter = new Skansing\Escapism\Router\Application;
+$applicationRouter = new Skansing\Escapology\Router\Application;
 $routeFound = $applicationRouter->handle(
 	__DIR__.'/route.php'
 );

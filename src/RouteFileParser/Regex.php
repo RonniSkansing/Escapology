@@ -1,7 +1,7 @@
 <?php
-namespace Skansing\Escapism\RouteFileParser;
+namespace Skansing\Escapology\RouteFileParser;
 
-use \Skansing\Escapism\RouteFileParser;
+use \Skansing\Escapology\RouteFileParser;
 
 class Regex implements RouteFileParser {
 

@@ -1,12 +1,12 @@
 <?php
-namespace Skansing\Escapism\Router;
+namespace Skansing\Escapology\Router;
 
-use \Skansing\Escapism\Cacher,
-    \Skansing\Escapism\Dispatcher,
-    \Skansing\Escapism\Router,
-    \Skansing\Escapism\RouteFileParser,
-    \Skansing\Escapism\RouteFileParser\Regex as RegexRouteFileParser,
-    \Skansing\Escapism\Dispatcher\Regex as RegexDispatcher;
+use \Skansing\Escapology\Cacher,
+    \Skansing\Escapology\Dispatcher,
+    \Skansing\Escapology\Router,
+    \Skansing\Escapology\RouteFileParser,
+    \Skansing\Escapology\RouteFileParser\Regex as RegexRouteFileParser,
+    \Skansing\Escapology\Dispatcher\Regex as RegexDispatcher;
   
 class Application implements Router {
 

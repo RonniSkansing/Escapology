@@ -1,5 +1,5 @@
 {
-    "name": "Escapism",
+    "name": "Escapology",
     "authors": [
         {
             "name": "Ronnie Skansing",
@@ -9,7 +9,7 @@
 
     "autoload": {
         "psr-4": {
-            "Skansing\\Escapism\\": "src/"
+            "Skansing\\Escapology\\": "src/"
         }
     },
     "require-dev": {

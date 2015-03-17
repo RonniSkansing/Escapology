@@ -1,7 +1,7 @@
 <?php
-namespace Skansing\Escapism\Dispatcher;
+namespace Skansing\Escapology\Dispatcher;
 
-use \Skansing\Escapism\Dispatcher;
+use \Skansing\Escapology\Dispatcher;
   
 class Regex implements Dispatcher {
 

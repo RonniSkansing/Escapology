@@ -7,17 +7,10 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          syntaxCheck="false"
-         beStrictAboutTestsThatDoNotTestAnything="true"
-        >
+         beStrictAboutTestsThatDoNotTestAnything="true">
     <testsuites>
-        <testsuite name="FastRoute Tests">
+        <testsuite name="Escapology Tests">
             <directory>./test/</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>./src/</directory>
-        </whitelist>
-    </filter>
 </phpunit>

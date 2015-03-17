@@ -1,7 +1,7 @@
 <?php
-namespace Skansing\Escapism\Test\Dispatcher;
+namespace Skansing\Escapology\Test\Dispatcher;
 
-use \Skansing\Escapism\Dispatcher\Regex as Dispatcher;
+use \Skansing\Escapology\Dispatcher\Regex as Dispatcher;
 
 class RegexTest extends \PHPUnit_Framework_TestCase {
 
@@ -15,7 +15,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase {
 	public function testDispatchReturnsNotFoundIfNoDataAreSet()
 	{
 		$this->assertSame(
-			\Skansing\Escapism\Dispatcher::NOT_FOUND,
+			\Skansing\Escapology\Dispatcher::NOT_FOUND,
 			$this->dispatcher->dispatch(
 				[]
 			)
@@ -28,7 +28,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase {
 	public function testDispatchReturnInterfaceNotFoundValueIfNotFound($routesData)
 	{
 		$this->assertSame(
-			\Skansing\Escapism\Dispatcher::FOUND,
+			\Skansing\Escapology\Dispatcher::FOUND,
 			$this->dispatcher->dispatch($routesData)
 		);
 	}

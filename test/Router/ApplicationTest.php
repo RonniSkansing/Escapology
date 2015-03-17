@@ -1,13 +1,13 @@
 <?php
-namespace Skansing\Escapism\Test\Router;
+namespace Skansing\Escapology\Test\Router;
 
-use \Skansing\Escapism\Router\Application;
+use \Skansing\Escapology\Router\Application;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase {
 
   const 
-    DispatcherClassName = '\Skansing\Escapism\Dispatcher\Regex',
-    RouteFileParserClassName = '\Skansing\Escapism\RouteFileParser\Regex';
+    DispatcherClassName = '\Skansing\Escapology\Dispatcher\Regex',
+    RouteFileParserClassName = '\Skansing\Escapology\RouteFileParser\Regex';
 
   private $application;
 
@@ -38,7 +38,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
 
   public function testRouteFileParserIsCalledForDigestingRouteFile()
   {
-    $routeFileParserMock = $this->getMockWithDisabledConstructor('\Skansing\Escapism\RouteFileParser');//self::DispatcherClassName);
+    $routeFileParserMock = $this->getMockWithDisabledConstructor('\Skansing\Escapology\RouteFileParser');//self::DispatcherClassName);
     $routeFileParserMock->expects($this->once())->method('digest');
     $application = new Application(null, $routeFileParserMock);
     $application->handle(

@@ -1,5 +1,5 @@
 <?php
-namespace Skansing\Escapism;
+namespace Skansing\Escapology;
 
 Interface Cacher {
 	public function set($key, $value);

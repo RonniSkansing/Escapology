@@ -1,7 +1,7 @@
 <?php
-namespace Skansing\Escapism\Test\RouteFileParser;
+namespace Skansing\Escapology\Test\RouteFileParser;
 
-use \Skansing\Escapism\RouteFileParser\Regex as RouteFileParser;
+use \Skansing\Escapology\RouteFileParser\Regex as RouteFileParser;
 
 class RegexTest extends \PHPUnit_Framework_TestCase {
 
