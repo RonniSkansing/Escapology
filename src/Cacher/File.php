@@ -19,7 +19,7 @@ class File implements Cacher {
 
   /**
    * @param  string $key File to get cached data 
-   * @return bool
+   * @return Mixed False if not cache is found
    */
   public function get($key)
   {

@@ -10,6 +10,10 @@ CAUTION
 -------------------------
 - *UNSTABLE* - Not suitable for use
 
+
+Requirements
+-------------------------
+Tested against PHP 5.4, 5.5, 5.6, 7, hhvm.   
  
 How to use
 --------------------------
