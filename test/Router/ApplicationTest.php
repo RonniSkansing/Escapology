@@ -7,7 +7,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
 
   const 
     DispatcherClassName = '\Skansing\Escapology\Dispatcher\Regex',
-    RouteFileParserClassName = '\Skansing\Escapology\RouteFileParser\Regex';
+    RouteFileParserClassName = '\Skansing\Escapology\RouteFileParser\Regex',
+    CacherClassName = '\Skansing\Escapology\Cacher\File';
 
   private $application;
 
@@ -16,6 +17,20 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
     $_SERVER['REQUEST_METHOD'] = 'GET½';
     $_SERVER['REQUEST_URI'] = '/user/42';
     $this->application = new Application;
+  }
+
+  public function testDefaultCacheFileNameIsSetWithCacher()
+  {
+    $application = new Application(
+      $this->getMockWithDisabledConstructor(self::DispatcherClassName),
+      $this->getMockWithDisabledConstructor(self::RouteFileParserClassName),
+      $this->getMockWithDisabledConstructor(self::CacherClassName)
+    );
+    $this->assertInstancePrivateAttributeIsSameAs(
+      $application,
+      'cacheKey',
+      '__routeCache'
+    );
   }
 
   public function testDispatcherDependencyFallsbackDispatcherRegex() 
@@ -56,6 +71,32 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
     );
   }
 
+  public function testHandleSetsCacheIfNoCacheWasFound()
+  {
+    $cacherMock = $this->getMockWithDisabledConstructor(self::CacherClassName);
+    $cacherMock->expects($this->once())->method('get')->will($this->returnValue(false));
+    $cacherMock->expects($this->once())->method('set');
+    $application = new Application(
+      $this->getMockWithDisabledConstructor(self::DispatcherClassName),
+      $this->getMockWithDisabledConstructor(self::RouteFileParserClassName),
+      $cacherMock
+    );
+    $application->handle('dummyValue');
+  }
+
+  public function testHandleGetsCache()
+  {
+    $cacherMock = $this->getMockWithDisabledConstructor(self::CacherClassName);
+    $cacherMock->expects($this->once())->method('get');
+    $application = new Application(
+      $this->getMockWithDisabledConstructor(self::DispatcherClassName),
+      $this->getMockWithDisabledConstructor(self::RouteFileParserClassName),
+      $cacherMock
+    );
+    $application->handle('dummyValue');
+  }
+
+
   private function getMockWithDisabledConstructor($className)
   {
     $stubBuilder = $this->getMockBuilder($className);
@@ -76,5 +117,15 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
     $this->assertInstanceOf($instanceOf, $value);
   }
 
-
+  private function assertInstancePrivateAttributeIsSameAs(
+    $instance, 
+    $attribute, 
+    $value
+  ){
+    $reflection = new \ReflectionClass($instance);
+    $reflection = $reflection->getProperty($attribute);
+    $reflection->setAccessible(TRUE);
+    $reflectionValue = $reflection->getValue($instance);
+    $this->assertSame($value, $reflectionValue);
+  }
 }
