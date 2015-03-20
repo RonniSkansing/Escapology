@@ -1,12 +1,19 @@
 {
     "name": "Escapology",
+    "type": "library",
+    "description": "Migration router",
+    "keywords": ["router", "Legacy code","front controller", "refactor", "framework escape", "migration"],
+    "homepage": "https://github.com/RonnieSkansing/Escapology",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Ronnie Skansing",
             "email": "rskansing@gmail.com"
         }
     ],
-
+    "require": {
+        "php": ">=5.4.0"
+    },
     "autoload": {
         "psr-4": {
             "Skansing\\Escapology\\": "src/"
