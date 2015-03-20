@@ -13,6 +13,15 @@ Requirements
 -------------------------
 Tested against PHP 5.4, 5.5, 5.6, 7, hhvm.   
  
+When to use
+-------------------------
+Use when your application is a terrible mess and your new go-to codebase/framework is fully loaded when it hits the front controller (maybe you should consider another framework?). An example of this could be migrating from CodeIgniter/Yii to Laravel 5. 
+At the time your clients hit Laravels front controller (router), Laravel already booted up a massive application. The performence hit of booting up the entire framework work only to route it the old application is too much. Instead put up this library to handle the routing between old and new application until you can remove both this libary and the old application.
+
+Suggested alternatives
+--------------------------
+Your new clean code dispatches to the old application if the route is not found, because it is fully decoupled and super fast from day 1. 
+
 How to use
 --------------------------
 See the examples folder for examples.
@@ -29,8 +38,7 @@ See the examples folder for examples.
 
 TODO
 --------------------------
-- Make route file parser for popular frameworks to avoid having to maintain replicate routes in this frontal router and the new application. 
-- Tests
+- Add a "Yo Dawg, I heard you like front controllers .."
 - Escape plans for frameworks like CodeIgniter, Yii and etc.
 
 Credits 
