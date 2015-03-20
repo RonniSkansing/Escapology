@@ -1,5 +1,5 @@
 {
-    "name": "Escapology",
+    "name": "skansing/escapology",
     "type": "library",
     "description": "Migration router",
     "keywords": ["router", "Legacy code","front controller", "refactor", "framework escape", "migration"],
