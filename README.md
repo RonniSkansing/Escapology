@@ -1,4 +1,4 @@
-Escapology [![Build Status](https://travis-ci.org/RonnieSkansing/Escapology.svg?branch=master)](https://travis-ci.org/RonnieSkansing/Escapology)
+Escapology [![Build Status](https://travis-ci.org/RonnieSkansing/Escapology.svg?branch=master)](https://travis-ci.org/RonnieSkansing/Escapology)[![Coverage Status](https://coveralls.io/repos/RonnieSkansing/Escapology/badge.svg)](https://coveralls.io/r/RonnieSkansing/Escapology)
 ========================
 A front controller to put in front of your impossible-to-ever-refactor-into-clean-code codebase/framework.
 
