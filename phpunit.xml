@@ -8,9 +8,19 @@
          processIsolation="false"
          syntaxCheck="false"
          beStrictAboutTestsThatDoNotTestAnything="true">
-    <testsuites>
-        <testsuite name="Escapology Tests">
-            <directory>./test/</directory>
-        </testsuite>
-    </testsuites>
+  <testsuites>
+    <testsuite name="Escapology Tests">
+        <directory>./test/</directory>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <whitelist>
+        <directory suffix=".php">./src</directory>
+        <!-- add more directories -->
+        <exclude>
+            <directory suffix=".php">./vendor/</directory>
+            <!-- add more directories with relative or absolute path -->
+        </exclude>
+    </whitelist>
+  </filter>
 </phpunit>
