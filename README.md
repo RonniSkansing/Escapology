@@ -1,4 +1,4 @@
-Escapology [![Build Status](https://travis-ci.org/RonnieSkansing/Escapology.svg?branch=master)](https://travis-ci.org/RonnieSkansing/Escapology) [![Coverage Status](https://coveralls.io/repos/RonnieSkansing/Escapology/badge.svg)](https://coveralls.io/r/RonnieSkansing/Escapology)
+Escapology [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/RonnieSkansing/Escapology/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/RonnieSkansing/Escapology/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/RonnieSkansing/Escapology/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/RonnieSkansing/Escapology/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/RonnieSkansing/Escapology/badges/build.png?b=master)](https://scrutinizer-ci.com/g/RonnieSkansing/Escapology/build-status/master)
 ========================
 A front controller to put in front of your impossible-to-ever-refactor-into-clean-code codebase/framework.
 
