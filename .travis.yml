@@ -11,9 +11,8 @@ before_script:
   - composer install
 
 script:
-  - mkdir -p ./build/logs
-  - ./vendor/bin/phpunit 
+  - ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover ./build/logs/coverage.clover
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
