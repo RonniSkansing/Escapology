@@ -14,16 +14,11 @@
         <directory>./test/</directory>
     </testsuite>
   </testsuites>
-  <logging>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-  </logging>
   <filter>
     <whitelist>
         <directory suffix=".php">./src</directory>
-        <!-- add more directories -->
         <exclude>
             <directory suffix=".php">./vendor/</directory>
-            <!-- add more directories with relative or absolute path -->
         </exclude>
     </whitelist>
   </filter>

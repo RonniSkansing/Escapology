@@ -13,11 +13,6 @@ class Regex implements RouteFileParser {
     REGEX_AFFIX = ')$~';
 
   /**
-   * @var Array $routesData
-   */
-  private $routesData;
-
-  /**
    * Parses the passed route file and return a specialized array
    * 
    * @param  string $file Absolute path to the route file
@@ -34,19 +29,21 @@ class Regex implements RouteFileParser {
     }
     $routeRegexes = [];
     for($i = 0; $i < count($routesData) -1; ++$i) {
-      if(isset($routeRegexes[$routesData[$i][self::VERB]]) === false) {
-        $routeRegexes[$routesData[$i][self::VERB]] = self::REGEX_PREFIX;
-      }
-      $routeRegexes[$routesData[$i][self::VERB]] .= $routesData[$i][self::URI] . self::REGEX_SEPARATOR;  
+      $this->setRouteRegexData($routeRegexes, $routesData, $i);
+      $routeRegexes[$routesData[$i][self::VERB]] .= $routesData[$i][self::URI] . self::REGEX_SEPARATOR;
     }
-    if(isset($routeRegexes[$routesData[$i][self::VERB]]) === false) {
-      $routeRegexes[$routesData[$i][self::VERB]] = self::REGEX_PREFIX;
-    }
+    $this->setRouteRegexData($routeRegexes, $routesData, $i);
     $routeRegexes[$routesData[$i][self::VERB]] .= $routesData[$i][self::URI];
     foreach($routeRegexes as $verb => $regex) {
       $routeRegexes[$verb] .= self::REGEX_AFFIX;   
     }
 
     return $routeRegexes;
+  }
+
+  private function setRouteRegexData(&$routeRegexes, &$routesData, $index) {
+     if(isset($routeRegexes[$routesData[$index][self::VERB]]) === false) {
+        $routeRegexes[$routesData[$index][self::VERB]] = self::REGEX_PREFIX;
+      }
   }
 }

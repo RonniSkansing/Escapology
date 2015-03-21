@@ -9,32 +9,31 @@ use \Skansing\Escapology\Cacher,
     \Skansing\Escapology\Dispatcher\Regex as RegexDispatcher;
   
 class Application implements Router {
-
-  private 
+ 
     /**
      * @var RouteFileParser $routeFileParser
      */
-    $routeFileParser,
+    private $routeFileParser;
 
     /**
      * @var Dispatcher $dispatcher
      */
-    $dispatcher,
+    private $dispatcher;
 
     /**
      * @var Cacher $cacher
      */
-    $cacher,
+    private $cacher;
 
     /**
      * @var string $cacheKey]
      */
-    $cacheKey,
+    private $cacheKey;
 
     /**
      * @var boolean $cacheInUse
      */
-    $cacheInUse = false;
+    private $cacheInUse = false;
 
   /**
    * Application router
@@ -63,8 +62,6 @@ class Application implements Router {
    * Routes to new or old application
    * 
    * @param  string $routesFile     
-   * @param  string $newApplicationFile
-   * @param  string $oldApplicationFile
    */
   public function handle(
     $routesFile

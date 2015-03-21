@@ -4,16 +4,15 @@ namespace Skansing\Escapology\Dispatcher;
 use \Skansing\Escapology\Dispatcher;
   
 class Regex implements Dispatcher {
-
-  private 
+ 
     /**
      * @var string $uri
      */
-    $uri,
+    private $uri;
     /**
      * @var string $verb
      */
-    $verb;
+    private $verb;
 
   /**
    * @param string $verb The HTTP request method/verb
