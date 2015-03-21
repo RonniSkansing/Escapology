@@ -5,7 +5,7 @@ use \Skansing\Escapology\Router\Application;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase {
 
-  const 
+  const
     DispatcherClassName = '\Skansing\Escapology\Dispatcher\Regex',
     RouteFileParserClassName = '\Skansing\Escapology\RouteFileParser\Regex',
     CacherClassName = '\Skansing\Escapology\Cacher\File';

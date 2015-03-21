@@ -1,5 +1,5 @@
 <?php
 return [
-	['GET','/abc'],
-	['GET','/def']
+  ['GET','/abc'],
+  ['GET','/def']
 ];
