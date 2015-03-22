@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../vendor/autoload.php';
 $applicationRouter = new Skansing\Escapology\Router\Application(
-  null,
+  new RegexDispatcher($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']),
   null,
   new \Skansing\Escapology\Cacher\File,
   '_route_cache'

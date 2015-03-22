@@ -2,6 +2,7 @@
 namespace Skansing\Escapology\Test\Router;
 
 use \Skansing\Escapology\Router\Application;
+use \Skansing\Escapology\Dispatcher\Regex as Dispatcher;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase {
 
@@ -16,7 +17,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
   {
     $_SERVER['REQUEST_METHOD'] = 'GET½';
     $_SERVER['REQUEST_URI'] = '/user/42';
-    $this->application = new Application;
+    $dispatcher = new Dispatcher($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
+    $this->application = new Application($dispatcher);
   }
 
   public function testDefaultCacheFileNameIsSetWithCacher()
@@ -55,7 +57,10 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
   {
     $routeFileParserMock = $this->getMockWithDisabledConstructor('\Skansing\Escapology\RouteFileParser');//self::DispatcherClassName);
     $routeFileParserMock->expects($this->once())->method('digest');
-    $application = new Application(null, $routeFileParserMock);
+    $application = new Application(
+      new Dispatcher($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']),
+      $routeFileParserMock
+    );
     $application->handle(
       __DIR__.'/../FixtureData/routes.php'
     );

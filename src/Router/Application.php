@@ -42,15 +42,17 @@ class Application implements Router {
    *
    * @param Dispatcher|null      $dispatcher      
    * @param RouteFileParser|null $routeFileParser
+   * @param Cacher $cacher
+   * @param string $cacheKey
    */
   public function __construct(
-    Dispatcher $dispatcher = null,    
+    Dispatcher $dispatcher,  
     RouteFileParser $routeFileParser = null,
     Cacher $cacher = null,
     $cacheKey = null 
   ){
     $this->routeFileParser = $routeFileParser ?: new RegexRouteFileParser;
-    $this->dispatcher = $dispatcher ?: new RegexDispatcher($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
+    $this->dispatcher = $dispatcher;
     $this->cacher = $cacher;
     if($this->cacher) {
       $this->cacheKey = $cacheKey ?: '__routeCache';  
