@@ -3,7 +3,7 @@ Escapology [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/RonnieSkans
 A front controller to put in front of your impossible-to-ever-refactor-into-clean-code codebase/framework.
 
 The primary intention is to slowly and safely migrate away from a legacy codebase and into a new modern approach.
-	
+  
 
 Requirements
 -------------------------
@@ -37,36 +37,37 @@ The Regex Router
 At the moment there is only one kind of router/dispatcher to use, the regex one.
 
 Routes are declared in the following format
-`
-[
-  // Verb, Regex URI
-  ['GET', '/'],
-  ['GET', '/user/\d+'],
-  ['POST', '/user/'],
-  ['PUT', '/user/.+'],
-  // etc
-]
-`
+
+
+    [
+      // Verb, Regex URI
+      ['GET', '/'],
+      ['GET', '/user/\d+'],
+      ['POST', '/user/'],
+      ['PUT', '/user/.+'],
+      // ..
+    ]
+
 
 Regular use
 ------------------------------
 As described the examples file would look something like this
-`
-require __DIR__ . '/../../vendor/autoload.php';
-$applicationRouter = new Skansing\Escapology\Router\Application(
-  new RegexDispatcher($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']),
-  null,
-  new \Skansing\Escapology\Cacher\File,
-  '_route_cache'
-);
-$routeFound = $applicationRouter->handle(
-  __DIR__.'/route.php'
-);
-if($routeFound) {
-  require __DIR__.'/newApplication/index.php';
-} else {
-  require __DIR__.'/oldApplication/index.php';
-}
+
+    require __DIR__ . '/../../vendor/autoload.php';
+    $applicationRouter = new Skansing\Escapology\Router\Application(
+      new RegexDispatcher($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']),
+      null,
+      new \Skansing\Escapology\Cacher\File,
+      '_route_cache'
+    );
+    $routeFound = $applicationRouter->handle(
+      __DIR__.'/route.php'
+    );
+    if($routeFound) {
+      require __DIR__.'/newApplication/index.php';
+    } else {
+      require __DIR__.'/oldApplication/index.php';
+    }
 `
 
 Remember to clear the cache file when new routes are set. If you only have a few routes there isnt much gain to using a cached file, but around the 100-1000 routes the benefits of not having to parse the route files are obvious.
