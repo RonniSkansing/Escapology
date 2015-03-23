@@ -32,11 +32,47 @@ Breaking free of your chains (framework/vendor lock in)
 6. Migrate the old codebase bit by bit to the new one. 
 7. When all of the old codebase is gone, remove Escapology and replace it with the real front controller.
 
-TODO
---------------------------
-- Write a more descriptive how to use than look in the examples folder
-- Escape plans for frameworks like CodeIgniter, Yii and etc.
+The Regex Router
+----------------------------
+At the moment there is only one kind of router/dispatcher to use, the regex one.
+
+Routes are declared in the following format
+`
+[
+  // Verb, Regex URI
+  ['GET', '/'],
+  ['GET', '/user/\d+'],
+  ['POST', '/user/'],
+  ['PUT', '/user/.+'],
+  // etc
+]
+`
+
+Regular use
+------------------------------
+As described the examples file would look something like this
+`
+require __DIR__ . '/../../vendor/autoload.php';
+$applicationRouter = new Skansing\Escapology\Router\Application(
+  new RegexDispatcher($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']),
+  null,
+  new \Skansing\Escapology\Cacher\File,
+  '_route_cache'
+);
+$routeFound = $applicationRouter->handle(
+  __DIR__.'/route.php'
+);
+if($routeFound) {
+  require __DIR__.'/newApplication/index.php';
+} else {
+  require __DIR__.'/oldApplication/index.php';
+}
+`
+
+Remember to clear the cache file when new routes are set. If you only have a few routes there isnt much gain to using a cached file, but around the 100-1000 routes the benefits of not having to parse the route files are obvious.
+
+If you want to use it uncached, simply only pass a dispatcher.
 
 Credits 
 ---------------------------
-This package regex routing is highly inspired by Nikita Popov's [FastRoute](https://github.com/nikic/FastRoute/) library
+This package regex routing is inspired by Nikita Popov's [FastRoute](https://github.com/nikic/FastRoute/) library
