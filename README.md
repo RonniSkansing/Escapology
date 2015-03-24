@@ -7,7 +7,7 @@ The primary intention is to slowly and safely migrate away from a legacy codebas
 
 Requirements
 -------------------------
-Tested against PHP 5.4, 5.5, 5.6, 7, hhvm.   
+Tested against PHP 5.4, 5.5, 5.6, 7 and hhvm.   
  
 When to use
 -------------------------
@@ -39,7 +39,7 @@ At the moment there is only one kind of router/dispatcher to use, the regex one.
 Routes are declared in the following format
 
 
-    [
+    return [
       // Verb, Regex URI
       ['GET', '/'],
       ['GET', '/user/\d+'],
@@ -64,6 +64,7 @@ As described the examples file would look something like this
       __DIR__.'/route.php'
     );
     if($routeFound) {
+      // or maybe you are already in the new applications frontcontroller and can go straight to dispatching
       require __DIR__.'/newApplication/index.php';
     } else {
       require __DIR__.'/oldApplication/index.php';
