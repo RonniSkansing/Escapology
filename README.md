@@ -28,7 +28,7 @@ Breaking free of your chains (framework/vendor lock in)
 2. Setup a new codebase.
 3. Setup the Escapology front controller, feed it the front controller of your old and new code base.
 4. Feed the new front controller either a static route file or your new codebases. (take a look at the examples)
-5. Routes found in the new code base will be send to the new code base, any not found will be send to the old codebase. 
+5. Routes found in the new code base will be sent to the new code base, any not found will be sent to the old codebase. 
 6. Migrate the old codebase bit by bit to the new one. 
 7. When all of the old codebase is gone, remove Escapology and replace it with the real front controller.
 
@@ -38,7 +38,7 @@ At the moment there is only one kind of router/dispatcher to use, the regex one.
 
 Routes are declared in the following format
 
-
+```php
     return [
       // Verb, Regex URI
       ['GET', '/'],
@@ -47,12 +47,12 @@ Routes are declared in the following format
       ['PUT', '/user/.+'],
       // ..
     ]
-
+```
 
 Regular use
 ------------------------------
 As described the examples file would look something like this
-
+```php
     require __DIR__ . '/../../vendor/autoload.php';
     $applicationRouter = new Skansing\Escapology\Router\Application(
       new RegexDispatcher($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']),
@@ -69,7 +69,7 @@ As described the examples file would look something like this
     } else {
       require __DIR__.'/oldApplication/index.php';
     }
-`
+```
 
 Remember to clear the cache file when new routes are set. If you only have a few routes there isnt much gain to using a cached file, but around the 100-1000 routes the benefits of not having to parse the route files are obvious.
 
